@@ -1,13 +1,13 @@
 sd=[
-    [0,2,0,4,0,9,1,0,0],
-    [0,0,6,0,5,0,0,8,9],
-    [0,7,0,0,8,3,0,2,4],
-    [7,1,0,5,0,0,0,0,0],
-    [0,0,0,0,9,0,2,0,0],
-    [0,0,0,0,4,0,0,0,7],
-    [0,6,0,0,0,0,0,0,0],
-    [0,0,7,3,0,0,8,0,1],
-    [3,4,0,0,0,5,0,6,0]
+    [0,1,0,3,0,9,0,6,0],
+    [9,0,0,5,1,6,0,0,2],
+    [0,0,5,0,0,0,9,0,0],
+    [1,7,0,0,4,0,0,9,5],
+    [0,5,0,7,0,3,0,2,0],
+    [2,9,0,0,5,0,0,7,6],
+    [0,0,6,0,0,0,2,0,0],
+    [7,0,0,1,8,5,0,0,3],
+    [0,3,0,2,0,4,0,5,0]
 ]
 caicezidian={}
 xgg0=[];xgg1=[];xgg2=[];xgg3=[];xgg4=[];xgg5=[];xgg6=[];xgg7=[];xgg8=[]
@@ -152,8 +152,10 @@ def checkonly(x,y):
     for i in range(len(vs)):
         if len(vs[i])==1:
             #只有一个可能性就将这个可能性填写到数独中
+            print(caicezidian)
             sd[int(x)][int(y)]=(caicezidian[str(int(x))+str(int(y))][0])
             caicezidian.pop(str(int(x))+str(int(y)))
+
 
 #填写最大的值
 def fillmax():
@@ -166,27 +168,16 @@ def fillmax():
         for i in range(len(vs)):
             sd[int(x)][int(y)] = (max(vs[i]))
 
-def fillmax2(x,y):
-    print("fillmax_start")
-    vs = list(caicezidian.values())
-    print(len(vs))
-    for i in range(len(vs)):
-        sd[int(x)][int(y)] = (max(vs[i]))
-        print(sd)
-        caicezidian.pop(str(int(x)) + str(int(y)))
-        findnull()
-
 if __name__ == '__main__':
-    print(sd)
-    findnull()
-    while True:
-        if len(caicezidian) == 0:
-            print("解题成功")
-            print(sd)
-            break
-        else:
-            print("还有" + str(len(caicezidian)) + "个字典列表")
-            findnull()
-            print(caicezidian)
-
-
+        print(sd)
+        findnull()
+        while True:
+            if len(caicezidian)==0:
+                print("解题成功")
+                for i in range(9):
+                    print(sd[i])
+                break
+            else:
+                print("还有"+str(len(caicezidian))+"个字典列表")
+                findnull()
+                print(caicezidian)
