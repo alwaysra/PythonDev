@@ -11,7 +11,7 @@ sd=[
 ]
 caicezidian={}
 xgg0=[];xgg1=[];xgg2=[];xgg3=[];xgg4=[];xgg5=[];xgg6=[];xgg7=[];xgg8=[]
-#查找所有空白 并且生成字典
+#查找所有空白单元格 并且生成字典
 def findnull():
     for x in range(9):
         for y in range(9):
@@ -139,8 +139,22 @@ def guolv(x,y,ggno):
             if i in lia:
                 lia.remove(i)
     print("xyXY轴和小宫格可能性:" + x + y + str(lia))
+    caicezidian[str(int(x))+str(int(y))]=lia
+    checkonly(x,y)
+
+#检查唯一性 如果猜测字典中只有一个将这个数字填写到对应数独坐标中 然后查找所有空白单元格
+def checkonly(x,y):
+    vs=list(caicezidian.values())
+    for i in range(len(vs)):
+        if len(vs[i])==1:
+            #只有一个可能性就将这个可能性填写到数独中
+            sd[int(x)][int(y)]=(caicezidian[str(int(x))+str(int(y))][0])
+            caicezidian.pop(str(int(x))+str(int(y)))
+            findnull()
+
 
 if __name__ == '__main__':
     findnull()
     xgg()
     a()
+    print(sd)
