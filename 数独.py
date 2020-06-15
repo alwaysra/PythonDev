@@ -59,7 +59,6 @@ def xgg():
         for y in range(6, 9):
             if sd[x][y] != 0:
                 xgg8.append(sd[x][y])
-    a()
 
 #将猜测字典的每个获得坐标点并且给过滤器
 def a():
@@ -87,6 +86,7 @@ def a():
         else:
             ggno=8
         guolv(x,y,ggno)
+
 
 #过滤器 将输入的坐标点每列比较 每行比较 然后刷新猜测字典
 def guolv(x,y,ggno):
@@ -144,49 +144,60 @@ def guolv(x,y,ggno):
                 lia.remove(i)
     #print("xyXY轴和小宫格可能性:" + x + y + str(lia))
     caicezidian[str(int(x))+str(int(y))]=lia
-    checkonly(x,y)
 
 #检查唯一性 如果猜测字典中只有一个将这个数字填写到对应数独坐标中 然后查找所有空白单元格
-def checkonly(x,y):
+def checkonly():
+    zbs=list(caicezidian.keys())
     vs=list(caicezidian.values())
     for i in range(len(vs)):
+        x = zbs[i][0]
+        y = zbs[i][1]
         if len(vs[i])==1:
             #只有一个可能性就将这个可能性填写到数独中
+            print("在"+str(int(x))+str(int(y))+"中只能填入"+str(caicezidian[str(int(x))+str(int(y))][0]))
             sd[int(x)][int(y)]=(caicezidian[str(int(x))+str(int(y))][0])
             caicezidian.pop(str(int(x))+str(int(y)))
+            return True
 
-#填写最大的值
-def fillmax():
-    print("fillmax_start")
-    zbs=list(caicezidian.keys())
-    vs = list(caicezidian.values())
-    for i in range(len(zbs)):
-        x=zbs[i][0]
-        y=zbs[i][1]
-        for i in range(len(vs)):
-            sd[int(x)][int(y)] = (max(vs[i]))
 
-def fillmax2(x,y):
-    print("fillmax_start")
-    vs = list(caicezidian.values())
-    print(len(vs))
-    for i in range(len(vs)):
-        sd[int(x)][int(y)] = (max(vs[i]))
+def trymax():
+    tmp=caicezidian
+    zbs = list(tmp.keys())
+    vs = list(tmp.values())
+    i = 0
+    x = zbs[i][0]
+    y = zbs[i][1]
+    zbmax = max(list(vs[i]))
+    print(str(x) + str(y) + str(zbmax))
+    sd[int(x)][int(y)] = zbmax
+    print(sd)
+    caicezidian = {}
+    findnull()
+    a()
+    print(caicezidian)
+    if checkonly() == True:
         print(sd)
-        caicezidian.pop(str(int(x)) + str(int(y)))
-        findnull()
+        i += 1
 
 if __name__ == '__main__':
-    print(sd)
-    findnull()
-    while True:
-        if len(caicezidian) == 0:
-            print("解题成功")
-            print(sd)
-            break
+    nullcountno=0
+    print("题目是:")
+    for i in range(9):
+        if (i+1)%3==0:
+            print(sd[i])
+            print("============================")
         else:
-            print("还有" + str(len(caicezidian)) + "个字典列表")
-            findnull()
-            print(caicezidian)
-
-
+            print(sd[i])
+    print("遍历所有单元格并且查找空单元格生成猜测字典")
+    findnull()
+    if len(caicezidian.keys())==0:
+        print("没有可以填的空!")
+    else:
+        nullcountno=len(caicezidian.keys())
+        print("目前有"+str(len(caicezidian.keys()))+"个待填空")
+        for i in range(nullcountno):
+            a()
+            if checkonly()==True:
+                print(sd)
+                print(caicezidian)
+        trymax()

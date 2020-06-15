@@ -152,7 +152,7 @@ def checkonly(x,y):
     for i in range(len(vs)):
         if len(vs[i])==1:
             #只有一个可能性就将这个可能性填写到数独中
-            print(caicezidian)
+            print(str(int(x))+str(int(y))+"-"+str(caicezidian[str(int(x))+str(int(y))][0]))
             sd[int(x)][int(y)]=(caicezidian[str(int(x))+str(int(y))][0])
             caicezidian.pop(str(int(x))+str(int(y)))
 
