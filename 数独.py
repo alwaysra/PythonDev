@@ -1,4 +1,5 @@
-sd=[
+import os
+pzsd=[
     [0,2,0,4,0,9,1,0,0],
     [0,0,6,0,5,0,0,8,9],
     [0,7,0,0,8,3,0,2,4],
@@ -8,6 +9,28 @@ sd=[
     [0,6,0,0,0,0,0,0,0],
     [0,0,7,3,0,0,8,0,1],
     [3,4,0,0,0,5,0,6,0]
+]
+sda=[
+    [0,1,0,3,0,9,0,6,0],
+    [9,0,0,5,1,6,0,0,2],
+    [0,0,5,0,0,0,9,0,0],
+    [1,7,0,0,4,0,0,9,5],
+    [0,5,0,7,0,3,0,2,0],
+    [2,9,0,0,5,0,0,7,6],
+    [0,0,6,0,0,0,2,0,0],
+    [7,0,0,1,8,5,0,0,3],
+    [0,3,0,2,0,4,0,5,0]
+]
+sd=[
+    [0,6,0,0,1,0,0,7,0],
+    [8,0,1,0,0,0,0,0,2],
+    [0,0,0,5,2,0,0,1,0],
+    [0,0,0,3,0,9,1,0,6],
+    [4,0,3,0,0,0,5,0,8],
+    [6,0,5,2,0,8,0,0,0],
+    [0,4,0,0,3,5,0,0,0],
+    [1,0,0,0,0,0,3,0,9],
+    [0,3,0,0,9,0,0,8,0]
 ]
 caicezidian={}
 xgg0=[];xgg1=[];xgg2=[];xgg3=[];xgg4=[];xgg5=[];xgg6=[];xgg7=[];xgg8=[]
@@ -161,6 +184,7 @@ def checkonly():
             return True
 
 def tmax():
+    print("tmax_start")
     zbs = list(caicezidian.keys())
     print(len(zbs))
     vs = list(caicezidian.values())
@@ -172,15 +196,16 @@ def tmax():
     sd[int(x)][int(y)] = zbmax
     findnull()
     a()
-    newcaice=len(list(caicezidian.keys()))
-    while newcaice<len(zbs):
-        if checkonly()==True:
+    newcaice = len(list(caicezidian.keys()))
+    while newcaice < len(zbs):
+        if checkonly() == True:
+            print(vs[i])
             a()
             print(sd)
             print(caicezidian)
         else:
             break
-
+    print("tmax_stop")
 
 if __name__ == '__main__':
     nullcountno=0
